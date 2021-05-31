@@ -1,4 +1,5 @@
 import argparse
+import os
 import requests
 from bs4 import BeautifulSoup
 from book_maker import *
@@ -27,7 +28,9 @@ ap.add_argument("-u", "--urls", nargs='+', type=url_checker, required=True,
    help="calameo url of the book you want to download")
 ap.add_argument("-n", "--names", nargs='*', required=False, default=[],
    help="the output name of the PDF book, if not specified, it will be the one on the website")
+ap.add_argument("-d", "--directory", required=False, default=os.getcwd(),
+   help="the output directory, and if not specified, the working one")
 args = vars(ap.parse_args())
 
 books = {book:title for book,title in zip_longest(valid_urls(args["urls"]),args["names"],fillvalue="")}
-pdf_maker(books)
+pdf_maker(books, directory=args["directory"])
