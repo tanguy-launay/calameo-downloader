@@ -5,5 +5,3 @@ fpdf
 pillow
 pypdf2
 urllib3
-collections
-logging
